@@ -3,7 +3,7 @@ var voyager = require('voyager')
   , vfs = require('vinyl-fs')
   , vss = require('vinyl-source-stream');
 
-voyager.task('browserify', function (done) {
+voyager.task('browserify', 'scripts', function (done) {
   browserify({ debug: true })
     .add(voyager.SRC + '/javascripts/main.js')
     .bundle()
