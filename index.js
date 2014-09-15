@@ -1,6 +1,5 @@
 var voyager = require('voyager')
   , browserify = require('browserify')
-  , vfs = require('vinyl-fs')
   , vss = require('vinyl-source-stream');
 
 voyager.task('scripts-prebuild', ['scripts', 'prebuild'], function (done) {
@@ -8,27 +7,27 @@ voyager.task('scripts-prebuild', ['scripts', 'prebuild'], function (done) {
     .add(voyager.SRC + '/javascripts/main.js')
     .bundle()
     .pipe(vss('main.js'))
-    .pipe(vfs.dest(voyager.TMP + '/javascripts'))
+    .pipe(voyager.out.dev('javascripts'))
     .on('end', done);
 });
 
 voyager.task('scripts-vendor', ['scripts', 'prebuild'], function (done) {
-  vfs.src(this.SRC + '/javascripts/vendor/**/*.js')
-    .pipe(vfs.dest(this.TMP + '/javascripts/vendor'))
+  this.in.src('javascripts/vendor/**/*.js')
+    .pipe(this.out.dev('javascripts/vendor'))
     .on('end', done);
 });
 
 voyager.task('scripts-build', ['scripts', 'build'], function (done) {
-  vfs.src([
+  this.src([
       this.TMP + '/javascripts/main.js'
     , '!' + this.TMP + '/javascripts/vendor/*'
     ])
-    .pipe(vfs.dest(this.BLD + '/javascripts'))
+    .pipe(this.out.bld('javascripts'))
     .on('end', done);
 });
 
 voyager.task('scripts-build-vendor', ['scripts', 'build'], function (done) {
-  vfs.src(this.TMP + '/javascripts/vendor/**/*.js')
-    .pipe(vfs.dest(this.BLD + '/javascripts/vendor'))
+  this.in.dev('javascripts/vendor/**/*.js')
+    .pipe(this.out.bld('javascripts/vendor'))
     .on('end', done);
 });
