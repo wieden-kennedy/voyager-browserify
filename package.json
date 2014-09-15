@@ -1,17 +1,17 @@
 {
   "name": "voyager-browserify",
   "version": "0.0.0",
-  "description": "",
+  "description": "Browserify task for voyager",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "author": "David Glivar <davidglivar@gmail.com>",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:davidglivar/voyager-browserify.git"
+  },
   "dependencies": {
     "browserify": "^5.10.0",
-    "vinyl-fs": "^0.3.6",
     "vinyl-source-stream": "^0.1.1",
-    "voyager": "^0.2.11"
+    "voyager": "^0.3.0"
   }
 }
