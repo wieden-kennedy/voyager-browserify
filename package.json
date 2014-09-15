@@ -1,6 +1,6 @@
 {
   "name": "voyager-browserify",
-  "version": "0.1.1",
+  "version": "0.1.11",
   "description": "Browserify task for voyager",
   "main": "index.js",
   "author": "David Glivar <davidglivar@gmail.com>",
