@@ -2,34 +2,36 @@ var browserify = require('browserify')
   , vss = require('vinyl-source-stream');
 
 module.exports = function (voyager) {
-
-  voyager.task('scripts-prebuild', ['scripts', 'prebuild'], function (done) {
+  
+  voyager.task('write', 'scripts', function (done) {
+    console.log('im a plugin');
     browserify({ debug: true })
       .add(voyager.SRC + '/javascripts/main.js')
       .bundle()
       .pipe(vss('main.js'))
-      .pipe(voyager.out.dev('javascripts'))
+      .pipe(this.out('javascripts'))
       .on('end', done);
   });
 
-  voyager.task('scripts-vendor', ['scripts', 'prebuild'], function (done) {
-    this.in.src('javascripts/vendor/**/*.js')
-      .pipe(this.out.dev('javascripts/vendor'))
+  voyager.task('write', 'scripts-vendor', function (done) {
+    this.src('javascripts/vendor/**/*.js')
+      .pipe(this.out('javascripts/vendor'))
       .on('end', done);
   });
 
-  voyager.task('scripts-build', ['scripts', 'build'], function (done) {
-    this.src([
-        this.TMP + '/javascripts/main.js'
-      , '!' + this.TMP + '/javascripts/vendor/*'
-      ])
-      .pipe(this.out.bld('javascripts'))
+  voyager.task('build', 'scripts', function (done) {
+    this.src(['javascripts/main.js', '!javascripts/vendor/*'])
+      .pipe(this.out('javascripts'))
       .on('end', done);
   });
 
-  voyager.task('scripts-build-vendor', ['scripts', 'build'], function (done) {
-    this.in.dev('javascripts/vendor/**/*.js')
-      .pipe(this.out.bld('javascripts/vendor'))
+  voyager.task('build', 'scripts-vendor', function (done) {
+    this.src('javascripts/vendor/**/*.js')
+      .pipe(this.out('javascripts/vendor'))
       .on('end', done);
   });
+
+  voyager.cancelWatch('javascripts/**/*.js');
+
+  voyager.watch(['javascripts/**/*.js', '!javascripts/vendor/*'], 'scripts');
 };
