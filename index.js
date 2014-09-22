@@ -4,7 +4,6 @@ var browserify = require('browserify')
 module.exports = function (voyager) {
   
   voyager.task('write', 'scripts', function (done) {
-    console.log('im a plugin');
     browserify({ debug: true })
       .add(voyager.SRC + '/javascripts/main.js')
       .bundle()
@@ -20,7 +19,7 @@ module.exports = function (voyager) {
   });
 
   voyager.task('build', 'scripts', function (done) {
-    this.src(['javascripts/main.js', '!javascripts/vendor/*'])
+    this.src(['javascripts/main.js', '!javascripts/vendor/**'])
       .pipe(this.out('javascripts'))
       .on('end', done);
   });
@@ -33,5 +32,5 @@ module.exports = function (voyager) {
 
   voyager.cancelWatch('javascripts/**/*.js');
 
-  voyager.watch(['javascripts/**/*.js', '!javascripts/vendor/*'], 'scripts');
+  voyager.watch(['javascripts/**/*.js', '!javascripts/vendor/**'], 'scripts');
 };
