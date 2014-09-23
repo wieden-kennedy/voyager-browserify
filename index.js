@@ -1,4 +1,5 @@
 var browserify = require('browserify')
+  , uglify = require('gulp-uglify')
   , vss = require('vinyl-source-stream');
 
 module.exports = function (voyager) {
@@ -20,6 +21,7 @@ module.exports = function (voyager) {
 
   voyager.task('build', 'scripts', function (done) {
     this.src(['javascripts/main.js', '!javascripts/vendor/**'])
+      .pipe(uglify({ preserveComments: 'some' }))
       .pipe(this.out('javascripts'))
       .on('end', done);
   });
