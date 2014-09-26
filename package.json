@@ -2,9 +2,16 @@
   "name": "voyager-browserify",
   "version": "0.2.1",
   "description": "Browserify task for voyager",
+  "keywords": [
+    "voyager", "browserify", "task"
+  ],
+  "homepage": "https://github.com/wieden-kennedy/voyager-browserify",
+  "bugs": {
+    "url": "https://github.com/wieden-kennedy/voyager-browserify/issues"
+  },
   "main": "index.js",
   "author": "David Glivar <davidglivar@gmail.com>",
-  "license": "ISC",
+  "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
     "url": "git@github.com:davidglivar/voyager-browserify.git"
