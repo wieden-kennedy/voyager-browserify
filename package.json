@@ -1,6 +1,6 @@
 {
   "name": "voyager-browserify",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "Browserify task for voyager",
   "keywords": [
     "voyager", "browserify", "task"
@@ -14,7 +14,7 @@
   "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
-    "url": "git@github.com:davidglivar/voyager-browserify.git"
+    "url": "git@github.com:wieden-kennedy/voyager-browserify.git"
   },
   "dependencies": {
     "browserify": "^5.10.0",
